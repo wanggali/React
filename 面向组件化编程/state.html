@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+<div id="test"></div>
+
+<script type="text/babel">
+    //类式组件
+    class Weather extends React.Component {
+        //MyComponent的原型对象上
+        constructor(props) {
+            console.log(props)
+            super(props);
+            //初始化状态
+            this.state = {
+                isHot: false,
+                wind: '微风'
+            }
+            //解决this指向问题
+            this.checkWeather = this.checkWeather.bind(this)
+        }
+
+        checkWeather() {
+            //由于checkWeather作为onClick的回调，所以不是通过实例调用，而是直接调用，
+            // 类中方法默认开启了局部的严格模式
+
+            //state不可直接更改，需借助内置的api去更改
+            //this.state.isHot = !this.state.isHot 这是错误的做法
+            const isHot = this.state.isHot
+
+            //状态必须通过setState进行修改状态
+            this.setState({isHot: !isHot})
+
+            console.log(this)
+        }
+
+        render() {
+            console.log(this)
+            const {isHot, wind} = this.state
+            return <h1 onClick={this.checkWeather}>今天天气很{isHot ? '炎热' : '寒冷'},并且还有{wind}</h1>
+        }
+    }
+
+    ReactDOM.render(<Weather/>, document.getElementById("test"))
+
+
+</script>
+</body>
+</html>
