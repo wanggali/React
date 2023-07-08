@@ -15,38 +15,19 @@
 <script type="text/babel">
     //类式组件
     class Weather extends React.Component {
-        //MyComponent的原型对象上
-        //构造器调用了次
-        constructor(props) {
-            console.log(props)
-            super(props);
-            //初始化状态
-            this.state = {
-                isHot: false,
-                wind: '微风'
-            }
-            //解决this指向问题
-            this.checkWeather = this.checkWeather.bind(this)
+        // 初始化数据
+        state = {
+            isHot: false,
+            wind: '微风'
         }
 
-        //点几次 调用几次
-        checkWeather() {
-            //由于checkWeather作为onClick的回调，所以不是通过实例调用，而是直接调用，
-            // 类中方法默认开启了局部的严格模式
-
-            //state不可直接更改，需借助内置的api去更改
-            //this.state.isHot = !this.state.isHot 这是错误的做法
+        //自定义方法（箭头函数无this，找到外层this作为this）
+        checkWeather = () => {
             const isHot = this.state.isHot
-
-            //状态必须通过setState进行修改状态，且更新是一种合并状态
             this.setState({isHot: !isHot})
-
-            console.log(this)
         }
 
-        //render调用了 1+n次 （1-初始化）
         render() {
-            console.log(this)
             const {isHot, wind} = this.state
             return <h1 onClick={this.checkWeather}>今天天气很{isHot ? '炎热' : '寒冷'},并且还有{wind}</h1>
         }

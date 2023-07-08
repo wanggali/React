@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+
+<div id="test1"></div>
+<div id="test2"></div>
+<div id="test3"></div>
+
+<script type="text/babel">
+    //类式组件
+    class Person extends React.Component {
+
+        render() {
+            return (
+                <ul>
+                    <li>姓名：{this.props.name}</li>
+                    <li>性别：{this.props.sex}</li>
+                    <li>年龄：{this.props.age}</li>
+                </ul>
+            )
+        }
+    }
+
+    const tomInfo = {name: "tom", age: "18", sex: "女"}
+
+    console.log('@',{...tomInfo})
+
+    ReactDOM.render(<Person {...tomInfo}/>, document.getElementById("test1"))
+    ReactDOM.render(<Person name="jerry" age="20" sex="女"/>, document.getElementById("test2"))
+    ReactDOM.render(<Person name="mikey" age="30" sex="男"/>, document.getElementById("test3"))
+</script>
+</body>
+</html>
