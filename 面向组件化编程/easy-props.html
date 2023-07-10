@@ -25,33 +25,35 @@
                 <ul>
                     <li>姓名：{this.props.name}</li>
                     <li>性别：{this.props.sex}</li>
-                    <li>年龄：{this.props.age +1}</li>
+                    <li>年龄：{this.props.age + 1}</li>
                 </ul>
             )
         }
+
+        //对类型的必要性 性质
+        static propTypes = {
+            name: PropTypes.string.isRequired,
+            sex: PropTypes.string,
+            age: PropTypes.number,
+            //func-限制为函数类型
+            speck: PropTypes.func
+        }
+
+        static defaultProps = {
+            sex: '男',
+            age: 18
+        }
+
     }
 
-    //对类型的必要性 性质
-    Person.propTypes ={
-        name:PropTypes.string.isRequired,
-        sex:PropTypes.string,
-        age:PropTypes.number,
-        //func-限制为函数类型
-        speck:PropTypes.func
-    }
 
-    Person.defaultProps = {
-        sex:'男',
-        age:18
-    }
-
-    function speck(){
+    function speck() {
         console.log("我说话了")
     }
 
     const tomInfo = {name: "tom"}
 
-    console.log('@',{...tomInfo})
+    console.log('@', {...tomInfo})
 
     ReactDOM.render(<Person {...tomInfo} speck={speck}/>, document.getElementById("test1"))
     ReactDOM.render(<Person name="jerry" age={20} sex="女"/>, document.getElementById("test2"))

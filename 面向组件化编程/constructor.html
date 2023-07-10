@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+<div id="test"></div>
+
+<script type="text/babel">
+    //类式组件
+
+    class Person extends React.Component {
+
+        constructor(props) {
+            //构造器是否接受props，是否传递props，取决于是否希望在构造器中通过this访问props（及其罕见）
+            console.log(props)
+            super(props);
+        }
+
+        render() {
+            return (
+                <ul>
+                    <li>{this.props.name}</li>
+                </ul>
+            )
+        }
+    }
+
+
+
+    ReactDOM.render(<Person name="gali" />, document.getElementById("test"))
+</script>
+</body>
+</html>
