@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+<div id="test"></div>
+
+<script type="text/babel">
+    //类式组件
+
+    class LifeCycle extends React.Component {
+
+        state = {
+            opacity: 1
+        }
+        death = () => {
+            //卸载组件
+            ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+        }
+
+        //挂载函数-> 例如vue3里面的onMounted
+        componentDidMount() {
+            this.timer = setInterval(() => {
+                //获取原状态
+                let {opacity} = this.state
+                opacity = opacity - 0.1
+                if (opacity <= 0) {
+                    opacity = 1
+                }
+                this.setState({opacity})
+            }, 200)
+        }
+
+        //组件将要卸载
+        componentWillUnmount() {
+            //清除定时器
+            clearInterval(this.timer);
+        }
+
+        render() {
+            return (
+                <div>
+                    <h2 style={{opacity: this.state.opacity}}>React 学不会怎么办</h2>
+                    <button onClick={this.death}>不活了</button>
+                </div>
+            )
+        }
+    }
+
+
+    ReactDOM.render(<LifeCycle/>, document.getElementById("test"))
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+<div id="test"></div>
+
+<script type="text/babel">
+    //类式组件
+
+    class Person extends React.Component {
+
+        render() {
+            return (
+                <div>
+                    <input ref="" type="texinput1" placeholder="点击按钮提示数据"/>&nbsp;
+                    <button onClick={this.showData}>点我提示左侧的数据</button>
+                    &nbsp;
+                    <input ref="input2" onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
+
+
+                    <input ref={(currentNode) => {this.input1=currentNode}} type="texinput1" placeholder="点击按钮提示数据"/>&nbsp;
+                    <button onClick={this.showData}>点我提示左侧的数据</button>&nbsp;
+                    <input ref={(currentNode) => {this.input2=currentNode}} onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
+                </div>
+            )
+        }
+
+        showData = () => {
+            // const {input1} = this.refs
+            const {input1} = this
+            alert(input1.value)
+        }
+
+        showData2 = () => {
+            const {input2} = this
+            alert(input2.value)
+        }
+    }
+
+
+    ReactDOM.render(<Person/>, document.getElementById("test"))
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+<div id="test"></div>
+
+<script type="text/babel">
+    //类式组件
+
+    class Login extends React.Component {
+
+        login = (event) => {
+            event.preventDefault();//阻止表单的提交
+            const {username, password} = this.state
+            alert(`你输入的名字为${username},密码为${password}`)
+        }
+
+        state = {
+            username: '',
+            password: ''
+        }
+
+        //高阶函数
+        /**
+         * a函数，接受的参数为函数
+         * a函数，返回值为函数
+         *
+         * 常见的高阶函数：promise、setTimeout、arr.map()............
+         * 函数的柯里化：通过函数调用继续返回函数的方式，实现多次接受参数最后统一处理的方式
+         */
+        saveFormData = (key) => {
+            return (event) => {
+                this.setState({
+                    [key]: event.target.value
+                })
+            }
+        }
+
+        render() {
+            return (
+                <form action="http://www.atguigu.com" onSubmit={this.login}>
+                    <input onChange={this.saveFormData('username')} type="text" placeholder="用户名"
+                           name="username"/><br/>
+                    <input onChange={this.saveFormData('password')} type="password" placeholder="密码" name="password"/>
+                    <button type="submit">登录</button>
+                </form>
+            )
+        }
+
+    }
+
+
+    ReactDOM.render(<Login/>, document.getElementById("test"))
+</script>
+</body>
+</html>
