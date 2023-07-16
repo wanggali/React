@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/react/17.0.1/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/17.0.1/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+<div id="test"></div>
+
+<script type="text/babel">
+    //类式组件
+
+    //慢动作回放---使用index索引值做key
+    //{id: 1, name: 'gali', age: 20},
+    //{id: 2, name: 'xiaowang', age: 18}
+
+
+    class Person extends React.Component {
+
+        state = {
+            persons: [
+                {id: 1, name: 'gali', age: 20},
+                {id: 2, name: 'xiaowang', age: 18}
+            ]
+        }
+
+        addPerson = () => {
+            const {persons} = this.state
+
+            const p = {id: persons.length + 1, name: 'mikey', age: 21}
+
+            this.setState({persons: [p, ...persons]})
+        }
+
+        render() {
+            return (
+                <div>
+                    <h2>展示人员信息</h2>
+                    <button onClick={this.addPerson}>添加一个mikey</button>
+                    <ul>
+                        {this.state.persons.map((item) => {
+                            return <li key={item.id}>{item.name}---{item.age}</li>
+                        })}
+                    </ul>
+                </div>
+            )
+        }
+    }
+
+
+    ReactDOM.render(<Person/>, document.getElementById("test"))
+</script>
+</body>
+</html>
