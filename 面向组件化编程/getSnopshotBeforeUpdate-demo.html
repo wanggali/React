@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .list {
+            width: 200px;
+            height: 150px;
+            background-color: skyblue;
+            overflow: auto;
+        }
+
+        .news {
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+<script src="https://cdn.staticfile.org/react/17.0.1/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/17.0.1/umd/react-dom.development.js"></script>
+<!-- 生产环境中不建议使用 -->
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+<script src="https://cdn.bootcss.com/prop-types/15.6.1/prop-types.js"></script>
+
+<div id="test"></div>
+
+<script type="text/babel">
+    //类式组件
+
+    class NewsList extends React.Component {
+
+        //state的值任何时候都取决props的值，那么可以使用
+        static getDerivedStateFromProps(props, state) {
+            console.log('getDerivedStateFromProps,', props, state)
+            return true;
+        }
+
+        //组件挂载完毕的钩子 --常用 一般在这个钩子中做一些初始化的事，例如开启定时器，发送网络请求，订阅消息
+        componentDidMount() {
+            setInterval(() => {
+                //获取原状态
+                const {newsArr} = this.state
+
+                //模拟一条新闻
+                const news = '新闻' + (newsArr.length + 1)
+
+                this.setState({newsArr: [news, ...newsArr]})
+            }, 1000)
+        }
+
+        //组件卸载的钩子
+        componentWillUnmount() {
+            console.log("count componentWillUnmount")
+        }
+
+        //组件是否应该被更新 钩子
+        shouldComponentUpdate() {
+            console.log("count shouldComponentUpdate")
+            return true;
+        }
+
+        //快照---在更新之前获取快照值
+        getSnapshotBeforeUpdate() {
+            console.log("count getSnapshotBeforeUpdate")
+            return this.refs.list.scrollHeight
+        }
+
+        componentDidUpdate(preProps, preState, snapshotValue) {
+            console.log("count componentDidUpdate", preProps, preState, snapshotValue)
+            console.log(this.refs.list.scrollTop)
+            this.refs.list.scrollTop += this.refs.list.scrollHeight - snapshotValue
+        }
+
+        state = {
+            newsArr: []
+        }
+
+        render() {
+            return (
+                <div className="list" ref="list">
+                    {this.state.newsArr.map((news, index) => {
+                        return <div className="news" key={index}>{news}</div>
+                    })}
+                </div>
+            )
+        }
+    }
+
+
+    ReactDOM.render(<NewsList/>, document.getElementById("test"))
+</script>
+</body>
+</html>
