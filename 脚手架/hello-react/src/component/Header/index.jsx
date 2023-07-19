@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
+import * as PropTypes from "prop-types";
 
 export default class Header extends Component {
+
+    //对接收的props进行类型必要性的限制
+    static propTypes = {
+        addTodo:PropTypes.func.isRequired
+    }
 
     handlerKeyUp = (event) => {
         const {addTodo} = this.props

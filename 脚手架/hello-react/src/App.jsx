@@ -34,14 +34,58 @@ export default class App extends React.Component {
         this.setState({todos: [todoObj, ...this.state.todos]})
     }
 
+    changeTodo = (id, done) => {
+        const {todos} = this.state;
+        const newTodos = todos.map((item) => {
+            if (item.id === id) {
+                return {...item, done}
+            } else {
+                return item
+            }
+        })
+
+        this.setState({todos: newTodos})
+    }
+
+    deleteTodo = (id) => {
+        //需写window
+        if (!window.confirm('确定删除吗？')) {
+            return
+        }
+        const {todos} = this.state;
+        const newTodos = todos.filter((item) => {
+            return item.id !== id;
+        })
+
+        this.setState({todos: newTodos})
+    }
+
+    doneAll = (done) => {
+        const {todos} = this.state;
+        const newTodos = todos.map((item) => {
+            return {...item, done}
+        })
+
+        this.setState({todos: newTodos})
+    }
+
+    clearDoneAll = () => {
+        const {todos} = this.state;
+        const newTodos = todos.filter((item) => {
+            return !item.done;
+        })
+
+        this.setState({todos: newTodos})
+    }
+
     render() {
         const {todos} = this.state
         return (
             <div className="todo-container">
                 <div className="todo-wrap">
                     <Header addTodo={this.addTodo}/>
-                    <List todos={todos}/>
-                    <Footer/>
+                    <List todos={todos} changeTodo={this.changeTodo} deleteTodo={this.deleteTodo}/>
+                    <Footer todos={todos} checkAll={this.doneAll} clearDoneAll={this.clearDoneAll}/>
                 </div>
             </div>
         )
