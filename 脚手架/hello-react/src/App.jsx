@@ -3,6 +3,7 @@ import React from 'react'
 import Footer from "./component/Footer";
 import Header from "./component/Header";
 import List from "./component/List";
+import axios from "axios"
 
 export default class App extends React.Component {
     state = {
@@ -78,15 +79,25 @@ export default class App extends React.Component {
         this.setState({todos: newTodos})
     }
 
+    queryStudent = () => {
+        axios.get('getInit').then((response) => {
+            console.log(response)
+        }, (err) => {
+        })
+    }
+
     render() {
         const {todos} = this.state
         return (
-            <div className="todo-container">
-                <div className="todo-wrap">
-                    <Header addTodo={this.addTodo}/>
-                    <List todos={todos} changeTodo={this.changeTodo} deleteTodo={this.deleteTodo}/>
-                    <Footer todos={todos} checkAll={this.doneAll} clearDoneAll={this.clearDoneAll}/>
-                </div>
+            // <div className="todo-container">
+            //     <div className="todo-wrap">
+            //         <Header addTodo={this.addTodo}/>
+            //         <List todos={todos} changeTodo={this.changeTodo} deleteTodo={this.deleteTodo}/>
+            //         <Footer todos={todos} checkAll={this.doneAll} clearDoneAll={this.clearDoneAll}/>
+            //     </div>
+            // </div>
+            <div>
+                <button onClick={this.queryStudent}>点我获取学生数据</button>
             </div>
         )
     }
