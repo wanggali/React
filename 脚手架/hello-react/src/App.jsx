@@ -4,6 +4,8 @@ import Footer from "./component/Footer";
 import Header from "./component/Header";
 import List from "./component/List";
 import axios from "axios"
+import Search from "./component/Search";
+import GithubList from "./component/GithubList";
 
 export default class App extends React.Component {
     state = {
@@ -23,7 +25,11 @@ export default class App extends React.Component {
                 name: '打豆豆',
                 done: true
             }
-        ]
+        ],
+        githubList: [],
+        isFirst: true,
+        isLoading: false,
+        err: ''
     }
 
     /**
@@ -86,6 +92,12 @@ export default class App extends React.Component {
         })
     }
 
+
+    UpdateAppState = (stateObj) => {
+        this.setState({stateObj})
+    }
+
+
     render() {
         const {todos} = this.state
         return (
@@ -97,7 +109,8 @@ export default class App extends React.Component {
             //     </div>
             // </div>
             <div>
-                <button onClick={this.queryStudent}>点我获取学生数据</button>
+                <Search UpdateAppState={this.UpdateAppState}/>
+                <GithubList {...this.state}/>
             </div>
         )
     }
