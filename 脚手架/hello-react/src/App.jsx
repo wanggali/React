@@ -94,7 +94,7 @@ export default class App extends React.Component {
 
 
     UpdateAppState = (stateObj) => {
-        this.setState({stateObj})
+        this.setState({...stateObj})
     }
 
 
@@ -108,10 +108,15 @@ export default class App extends React.Component {
             //         <Footer todos={todos} checkAll={this.doneAll} clearDoneAll={this.clearDoneAll}/>
             //     </div>
             // </div>
-            <div>
-                <Search UpdateAppState={this.UpdateAppState}/>
-                <GithubList {...this.state}/>
-            </div>
+
+            // <div>
+            //     <Search/>
+            //     <GithubList/>
+            // </div>
+
+            <>
+                
+            </>
         )
     }
 }
