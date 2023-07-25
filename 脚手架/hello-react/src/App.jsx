@@ -6,6 +6,10 @@ import List from "./component/List";
 import axios from "axios"
 import Search from "./component/Search";
 import GithubList from "./component/GithubList";
+import {BrowserRouter, Link, NavLink, Route, Router} from 'react-router-dom'
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Banner from "./component/Banner";
 
 export default class App extends React.Component {
     state = {
@@ -114,8 +118,23 @@ export default class App extends React.Component {
             //     <GithubList/>
             // </div>
 
+            // BrowserRouter-路由器
             <>
-                
+                {/*<a href={"/about"} className="list-group-item">About</a><br/>*/}
+                {/*<a href={"/home"} className="list-group-item">Home</a>*/}
+
+                <NavLink activeClassName="gali" to={"/about"} className="list-group-item">About</NavLink><br/>
+                <NavLink activeClassName="gali" to={"/home"} className="list-group-item">Home</NavLink>
+
+                <div>
+                    {/*路由组件和一般组件
+                    1.写法不同:一般组件 <demo/> 路由组件 component={Demo}
+                    2.位置不同:component pages
+                    3.接收到的props不同 路由组件接受到三个不同的属性history,location,match*/}
+                    <Banner/>
+                    <Route path={"/about"} component={About}/>
+                    <Route path={"/home"} component={Home}/>
+                </div>
             </>
         )
     }
