@@ -6,7 +6,7 @@ import List from "./component/List";
 import axios from "axios"
 import Search from "./component/Search";
 import GithubList from "./component/GithubList";
-import {BrowserRouter, Link, NavLink, Route, Router, Switch} from 'react-router-dom'
+import {BrowserRouter, Link, NavLink, Redirect, Route, Router, Switch} from 'react-router-dom'
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Banner from "./component/Banner";
@@ -145,7 +145,8 @@ export default class App extends React.Component {
                     exact={true 严格匹配}*/}
                     <Switch>
                         <Route exact={true} path={"/about"} component={About}/>
-                        <Route exact={true} path={"/home"} component={Home}/>
+                        <Route  path={"/home"} component={Home}/>
+                        <Redirect to={'/about'} component={About}/>
                     </Switch>
                 </div>
             </>
