@@ -1,14 +1,46 @@
 import React, {Component} from 'react';
+import MyNavLink from "../../../component/MyNavLink";
+import {NavLink, Route} from "react-router-dom";
+import Detail from "./detail";
 
 class Index extends Component {
+    state = {
+        messageArr: [
+            {id: '01', title: '消息1'},
+            {id: '02', title: '消息2'},
+            {id: '03', title: '消息3'}
+        ]
+    }
+
     render() {
         return (
             <div>
                 <ul>
-                    <li>m1</li>
-                    <li>m2</li>
-                    <li>m3</li>
+                    {
+                        this.state.messageArr.map(item => {
+                            return (
+                                <li key={item.id}>
+                                    {/*携带params参数*/}
+                                    {/*<NavLink to={`/home/message/detail/${item.id}/${item.title}`}>{item.title}</NavLink>*/}
+                                    {/*    携带search参数*/}
+                                    <NavLink
+                                        to={`/home/message/detail/?id=${item.id}&title=${item.title}`}>{item.title}</NavLink>
+                                    {/*    携带state参数*/}
+                                    <NavLink
+                                        to={{pathname: '/home/message/detail', state: {...item}}}>{item.title}</NavLink>
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
+                {/*声明接受params参数*/}
+                {/*<Route path="/home/message/detail/:id/:title" component={Detail}></Route>*/}
+                {/*search参数 state参数*/}
+                <Route path="/home/message/detail/" component={Detail}></Route>
+
+                <hr/>
+
+
             </div>
         );
     }

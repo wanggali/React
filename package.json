@@ -3,6 +3,7 @@
     "axios": "^1.4.0",
     "prop-types": "^15.8.1",
     "pubsub-js": "^1.9.4",
+    "querystring": "^0.2.1",
     "react-router-dom": "^5.3.4"
   }
 }
