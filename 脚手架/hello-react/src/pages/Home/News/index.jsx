@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 
 class Index extends Component {
+    componentDidMount() {
+        setTimeout(() => {
+            this.props.history.push('/home/message')
+        }, 2000)
+    }
+
     render() {
         return (
             <div>

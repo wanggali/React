@@ -12,6 +12,37 @@ class Index extends Component {
         ]
     }
 
+
+    replace = (id, title) => {
+        // params参数
+        this.props.history.replace(`/home/message/detail/${id}/${title}`)
+
+        //search参数
+        this.props.history.replace(`/home/message/detail/?id=${id}&title=${title}`)
+
+        //state
+        this.props.history.replace(`/home/message/detail`, {id, title})
+    }
+
+    push = (id, title) => {
+        this.props.history.push(`/home/message/detail/${id}/${title}`)
+
+
+        this.props.history.push(`/home/message/detail/?id=${id}&title=${title}`)
+
+        this.props.history.push(`/home/message/detail`, {id, title})
+
+    }
+
+    back = () => {
+        this.props.history.goBack()
+    }
+
+    forward = () => {
+        this.props.history.goForward()
+
+    }
+
     render() {
         return (
             <div>
@@ -28,7 +59,11 @@ class Index extends Component {
                                     {/*    携带state参数*/}
                                     <NavLink
                                         to={{pathname: '/home/message/detail', state: {...item}}}>{item.title}</NavLink>
+
+                                    <button onClick={() => this.push(item.id, item.title)}>push查看</button>
+                                    <button onClick={() => this.replace(item.id, item.title)}>replace查看</button>
                                 </li>
+
                             )
                         })
                     }
@@ -40,7 +75,8 @@ class Index extends Component {
 
                 <hr/>
 
-
+                <button onClick={this.back}>回退</button>
+                <button onClick={this.forward}>前进</button>
             </div>
         );
     }

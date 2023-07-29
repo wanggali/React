@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Banner from "./component/Banner";
 import MyNavLink from "./component/MyNavLink";
+import {Button, Space} from "antd"
 
 export default class App extends React.Component {
     state = {
@@ -105,6 +106,7 @@ export default class App extends React.Component {
 
     render() {
         const {todos} = this.state
+
         return (
             // <div className="todo-container">
             //     <div className="todo-wrap">
@@ -131,24 +133,26 @@ export default class App extends React.Component {
                 {/*<NavLink activeClassName="gali" to={"/home"} className="list-group-item">Home</NavLink>*/}
 
                 {/*样式丢失？-》路由路径多级结构时，会出现样式丢失 HashRouter可以解决*/}
-                <MyNavLink to="/about">About</MyNavLink>
-                <MyNavLink to="/home">Home</MyNavLink>
+                {/*<MyNavLink to="/about">About</MyNavLink>*/}
+                {/*<MyNavLink to="/home">Home</MyNavLink>*/}
 
-                {/*精准匹配和模糊匹配*/}
-                <div>
-                    {/*路由组件和一般组件
-                    1.写法不同:一般组件 <demo/> 路由组件 component={Demo}
-                    2.位置不同:component pages
-                    3.接收到的props不同 路由组件接受到三个不同的属性history,location,match*/}
-                    <Banner/>
-                    {/*当匹配完成时，直接返回，不轮询其他组件 单一匹配 提升效率
-                    exact={true 严格匹配}*/}
-                    <Switch>
-                        <Route exact={true} path={"/about"} component={About}/>
-                        <Route  path={"/home"} component={Home}/>
-                        <Redirect to={'/about'} component={About}/>
-                    </Switch>
-                </div>
+                {/*/!*精准匹配和模糊匹配*!/*/}
+                {/*<div>*/}
+                {/*    /!*路由组件和一般组件*/}
+                {/*    1.写法不同:一般组件 <demo/> 路由组件 component={Demo}*/}
+                {/*    2.位置不同:component pages*/}
+                {/*    3.接收到的props不同 路由组件接受到三个不同的属性history,location,match*!/*/}
+                {/*    <Banner/>*/}
+                {/*    /!*当匹配完成时，直接返回，不轮询其他组件 单一匹配 提升效率*/}
+                {/*    exact={true 严格匹配}*!/*/}
+                {/*    <Switch>*/}
+                {/*        <Route exact={true} path={"/about"} component={About}/>*/}
+                {/*        <Route  path={"/home"} component={Home}/>*/}
+                {/*        <Redirect to={'/about'} component={About}/>*/}
+                {/*    </Switch>*/}
+                {/*</div>*/}
+
+
             </>
         )
     }

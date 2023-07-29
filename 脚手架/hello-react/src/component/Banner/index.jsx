@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter} from "react-router-dom";
 
 class Index extends Component {
     render() {
@@ -10,4 +11,6 @@ class Index extends Component {
     }
 }
 
-export default Index;
+
+//withRouter ->+加上路由组件特有的东西 props
+export default withRouter(Index);
