@@ -1,10 +1,12 @@
 import './App.css';
-import Count from "./component/Count";
+import Count from "./container/Count";
+import store from "./redux/store";
 
 function App() {
     return (
         <div>
-            <Count/>
+            {/*给容器组件传递store*/}
+            <Count store={store}/>
         </div>
     );
 }

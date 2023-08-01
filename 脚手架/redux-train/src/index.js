@@ -12,6 +12,7 @@ root.render(
     </React.StrictMode>
 );
 
+//检测redux状态的改变，发生了改变，则重新渲染App组件
 Store.subscribe(() => {
     root.render(
         <React.StrictMode>
