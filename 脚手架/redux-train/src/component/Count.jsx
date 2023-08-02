@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Store from "../redux/store";
-import {createDecrAction, createIncrAction, createIncrAsyncAction} from "../redux/count_action";
+import {createDecrAction, createIncrAction, createIncrAsyncAction} from "../redux/actions/count";
 
 class Count extends Component {
     // state = {

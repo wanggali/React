@@ -1,7 +1,7 @@
 /**
  * 为count生成action
  */
-import {DECR, INCR} from "./constant";
+import {DECR, INCR} from "../constant";
 
 //同步action 就是指action值为object对象
 export const createIncrAction = data => ({type: INCR, data})
