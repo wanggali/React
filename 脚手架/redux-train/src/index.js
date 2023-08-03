@@ -9,6 +9,7 @@ import {Provider} from "react-redux";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
+        {/*让所有app的后代组件都能收到redux中的state*/}
         <Provider store={Store}>
             <App/>
         </Provider>

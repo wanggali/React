@@ -92,6 +92,7 @@ class Count extends Component {
         return (
             <div>
                 {/*<h1>当前求和为:{Store.getState()}</h1>*/}
+                <h1>下方组件用户列表长度为{this.props.person.length}</h1>
                 <h1>当前求和为:{this.props.count}</h1>
                 <select ref={c => this.selectNumber = c}>
                     <option value="1">1</option>
@@ -112,7 +113,7 @@ class Count extends Component {
 
 //创建并暴露一个容器组件
 export default connect(
-    state => ({count: state}),
+    state => ({count: state.count, person: state.person}),
     //精简版写法mapDispatchToProps
     {
         incr: createIncrAction,
