@@ -1,12 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
+import Index from "./components/Fragment";
 
 function App() {
-  return (
-    <>
-
-    </>
-  );
+    return (
+        <>
+            <Index/>
+        </>
+    );
 }
 
 export default App;
