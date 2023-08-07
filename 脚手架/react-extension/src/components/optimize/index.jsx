@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState,PureComponent} from "react";
+
 
 export default () => {
     const [carName, setCarName] = useState('宝马五系')
