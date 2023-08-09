@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {NavLink, Outlet} from "react-router-dom";
+import {NavLink, Outlet, useNavigate} from "react-router-dom";
 
 const Message = () => {
     const [message] = useState([
@@ -9,13 +9,30 @@ const Message = () => {
         {id: '004', title: '消息4', content: '努力呀4'},
     ])
 
+    const navigate = useNavigate()
+    const showDetail = (item) => {
+        navigate('content', {
+            replace: false,
+            state: {
+                id: item.id,
+                title: item.title,
+                content: item.content
+            }
+        })
+    }
+
     return (
         <div>
             <h1>Message</h1>
             <ul>
                 {message.map(item => {
                     return <li key={item.id}>
-                        <NavLink to={`content/${item.id}/${item.title}/${item.content}`}>{item.title}</NavLink>
+                        <button onClick={() => showDetail(item)}>点我啊</button>
+                        {/*<NavLink to={`content/${item.id}/${item.title}/${item.content}`}>{item.title}</NavLink>*/}
+                        {/*<NavLink*/}
+                        {/*    to={`content?id=${item.id}&title=${item.title}&content=${item.content}`}>{item.title}</NavLink>*/}
+                        <NavLink to={`content`}
+                                 state={{id: item.id, title: item.title, content: item.content}}> {item.title}</NavLink>
                     </li>
                 })}
             </ul>

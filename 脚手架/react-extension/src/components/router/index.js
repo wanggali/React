@@ -23,7 +23,8 @@ export default [
                 element: <Message/>,
                 children: [
                     {
-                        path: 'content/:id/:title/:content',
+                        // path: 'content/:id/:title/:content',
+                        path: 'content',
                         element: <Content/>,
                     }
                 ]
